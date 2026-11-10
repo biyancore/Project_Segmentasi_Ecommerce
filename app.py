@@ -43,10 +43,11 @@ with col1:
 
 with col2:
     order_count = st.number_input("Total Pesanan Bulan Lalu (OrderCount)", min_value=0, max_value=100, value=5)
+    coupon_used = st.number_input("Jumlah Kupon Digunakan Bulan Lalu (CouponUsed)", min_value=0, max_value=100, value=1)
     cashback_amount = st.number_input("Rata-rata Cashback (Mata Uang)", min_value=0.0, max_value=500.0, value=150.0)
 
 # Menghitung Fitur Turunan (Feature Engineering otomatis)
-total_orders_engagement = order_count + 1  # asumsi nilai dasar kupon jika tidak diisi
+total_orders_engagement = order_count + coupon_used
 
 # Tombol Prediksi
 if st.button("🚀 Prediksi Segmen Pelanggan", type="primary"):
@@ -70,16 +71,18 @@ if st.button("🚀 Prediksi Segmen Pelanggan", type="primary"):
     st.markdown("---")
     st.subheader("🎯 Hasil Prediksi Segmen")
 
-    # Mapping Keterangan Klaster (Sesuaikan dengan profil rerata kelompokmu)
+    # Deskripsi mengacu pada profil rata-rata klaster model saat ini.
     if cluster == 0:
-        st.success("### 🥇 Segmen: Pelanggan Setia / High-Value (Klaster 0)")
-        st.write("**Karakteristik:** Masa berlangganan lama, transaksi tinggi, penerima cashback besar.")
-        st.info("💡 **Rekomendasi Pemasaran:** Berikan akses eksklusif fitur VIP, insentif loyalty, dan penawaran preorder.")
+        st.info("### Segmen: Aktivitas Belanja Relatif Rendah (Klaster 0)")
+        st.write("**Karakteristik kelompok:** Rata-rata masa keanggotaan dan jumlah pesanan paling rendah di antara ketiga klaster.")
+        st.info("💡 **Rekomendasi Pemasaran:** Coba penawaran perkenalan dan komunikasi yang mendorong pembelian berikutnya.")
     elif cluster == 1:
-        st.warning("### 🥈 Segmen: Pelanggan Potensial / Reguler (Klaster 1)")
-        st.write("**Karakteristik:** Aktivitas transaksi sedang, merespons promo dengan baik.")
-        st.info("💡 **Rekomendasi Pemasaran:** Berikan voucer *cross-selling* dan promosi terbatas untuk menaikkan nilai pesanan.")
+        st.success("### Segmen: Masa Keanggotaan Panjang (Klaster 1)")
+        st.write("**Karakteristik kelompok:** Rata-rata masa keanggotaan paling panjang dan cashback paling tinggi.")
+        st.info("💡 **Rekomendasi Pemasaran:** Pertimbangkan apresiasi keanggotaan dan penawaran yang relevan untuk pelanggan lama.")
+    elif cluster == 2:
+        st.success("### Segmen: Frekuensi Pesanan Tinggi (Klaster 2)")
+        st.write("**Karakteristik kelompok:** Rata-rata jumlah pesanan dan penggunaan kupon gabungan paling tinggi.")
+        st.info("💡 **Rekomendasi Pemasaran:** Pertimbangkan penawaran produk terkait dan program untuk pelanggan yang aktif berbelanja.")
     else:
-        st.error("### 🥉 Segmen: Pelanggan Baru / Berisiko Churn (Klaster 2)")
-        st.write("**Karakteristik:** Tenure pendek, jarang mengakses aplikasi, nominal cashback rendah.")
-        st.info("💡 **Rekomendasi Pemasaran:** Jalankan kampanye *re-engagement*, diskon onboarding, dan survei kepuasan.")
+        st.warning(f"Klaster {cluster} belum memiliki deskripsi. Periksa profil model yang digunakan.")
