@@ -1,0 +1,37 @@
+{
+  "source_commit": "7cfd844e72b78874c6e232025b714bbab11b2040",
+  "dataset_sha256": "d6c9891ae75fc4e364cad222e92828616d72544c82cbeb7cb1cbe1048bcf5aa2",
+  "versions": {
+    "python": "3.13.12",
+    "scikit-learn": "1.9.0",
+    "pandas": "3.0.2",
+    "numpy": "2.4.2",
+    "scipy": "1.17.1",
+    "matplotlib": "3.10.9"
+  },
+  "features": [
+    "Tenure",
+    "WarehouseToHome",
+    "HourSpendOnApp",
+    "OrderCount",
+    "CashbackAmount",
+    "Total_Orders_Engagement"
+  ],
+  "best_kmeans_k": 2,
+  "best_kmeans_silhouette": 0.3752088865872891,
+  "selected_k": 3,
+  "kmeans_train_silhouette": 0.28206970996523945,
+  "kmeans_test_silhouette": 0.2798945127652416,
+  "ward_train_silhouette": 0.30182184437264525,
+  "cluster_sizes": {
+    "0": 3599,
+    "1": 792,
+    "2": 1239
+  },
+  "cluster_names": {
+    "0": "Aktivitas belanja rendah",
+    "1": "Frekuensi pesanan tinggi",
+    "2": "Masa keanggotaan panjang"
+  },
+  "old_target_050_reached": false
+}
